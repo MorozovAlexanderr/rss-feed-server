@@ -3,18 +3,20 @@ import passport from 'passport';
 import { appRouter } from '@/router';
 import errorHandlerMiddleware from '@/middlewares/errorHandler.middleware';
 import { Database } from '@/config/database';
+import feedParserJob from '@/services/cron';
 
 class App {
   private readonly app: Application;
-  private readonly port: number | string = process.env.PORT || 3000;
+  private readonly port = process.env.PORT;
 
   constructor() {
     this.app = express();
 
-    this.databaseSetup();
-    this.config();
-    this.routes();
-    this.errorHandling();
+    this.connectToDatabase();
+    this.initConfig();
+    this.initRoutes();
+    this.initJobs();
+    this.initErrorHandling();
   }
 
   public listen() {
@@ -23,20 +25,24 @@ class App {
     );
   }
 
-  private routes() {
+  private initRoutes() {
     this.app.use('/', appRouter.router);
   }
 
-  private config() {
+  private initConfig() {
     this.app.use(json());
     this.app.use(passport.initialize());
   }
 
-  private errorHandling() {
+  private initJobs() {
+    feedParserJob.start();
+  }
+
+  private initErrorHandling() {
     this.app.use(errorHandlerMiddleware);
   }
 
-  private databaseSetup() {
+  private connectToDatabase() {
     const database = new Database();
     database.connect();
   }
