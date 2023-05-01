@@ -15,7 +15,7 @@ class App {
     this.connectToDatabase();
     this.initConfig();
     this.initRoutes();
-    this.initJobs();
+    // this.initJobs();
     this.initErrorHandling();
   }
 
