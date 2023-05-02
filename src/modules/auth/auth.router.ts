@@ -8,12 +8,12 @@ import validate from '@/middlewares/validation.middleware';
 
 class AuthRouter {
   public router: Router;
-  private authController: AuthController;
+  private controller: AuthController;
   private path = '/auth';
 
   constructor() {
     this.router = Router();
-    this.authController = new AuthController();
+    this.controller = new AuthController();
     this.initRoutes();
   }
 
@@ -21,12 +21,12 @@ class AuthRouter {
     this.router.post(
       `${this.path}/register`,
       validate(userSignUpValidation),
-      this.authController.signUp
+      this.controller.signUp
     );
     this.router.post(
       `${this.path}/login`,
       validate(userSignInValidation),
-      this.authController.signIn
+      this.controller.signIn
     );
   }
 }

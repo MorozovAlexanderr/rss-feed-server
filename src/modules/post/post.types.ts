@@ -1,4 +1,4 @@
-import { Model, ObjectId } from 'mongoose';
+import { Model, ObjectId, PaginateModel } from 'mongoose';
 
 export interface Post {
   id: ObjectId;
@@ -9,4 +9,19 @@ export interface Post {
   date: Date;
 }
 
-export type TPostModel = Model<Post>;
+export type TPostModel = Model<Post> & PaginateModel<Post>;
+
+export interface PostPaginationQuery {
+  page: number;
+  limit?: number;
+  sortField?: string;
+  sortDir?: 'asc' | 'desc';
+  search?: string;
+}
+
+export interface PostCreationBody {
+  title: string;
+  body: string;
+}
+
+export type PostUpdateBody = Partial<PostCreationBody>;
