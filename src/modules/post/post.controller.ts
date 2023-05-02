@@ -5,7 +5,7 @@ import {
   ParamsRequest,
   QueryRequest,
   UserRequest,
-} from '@/common/types/requests.types';
+} from '@/shared/types/requests.types';
 import { PostModel } from '@/modules/post/post.model';
 import NotFoundException from '@/exceptions/notFound.exception';
 import {

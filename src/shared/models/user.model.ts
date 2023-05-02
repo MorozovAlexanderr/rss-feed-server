@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import { compareSync } from 'bcrypt';
-import { User, UserMethods, TUserModel } from '@/modules/user/user.types';
+import { User, UserMethods, TUserModel } from '@/shared/types/user.types';
 import { hashPassword } from '@/modules/auth/auth.utils';
 
 const userSchema = new Schema<User, TUserModel, UserMethods>(

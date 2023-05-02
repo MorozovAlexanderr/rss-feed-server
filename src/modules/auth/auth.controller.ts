@@ -1,7 +1,7 @@
 import { NextFunction, Response } from 'express';
-import { BodyRequest } from '@/common/types/requests.types';
+import { BodyRequest } from '@/shared/types/requests.types';
 import { SignInPayload, SignUpPayload } from '@/modules/auth/auth.types';
-import { UserModel } from '@/modules/user/user.model';
+import { UserModel } from '@/shared/models/user.model';
 import UserEmailConflictException from '@/exceptions/userEmailConflict.exception';
 import { issueJwt } from '@/modules/auth/auth.utils';
 import NotFoundException from '@/exceptions/notFound.exception';
