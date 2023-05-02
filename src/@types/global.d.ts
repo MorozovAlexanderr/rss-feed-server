@@ -13,6 +13,7 @@ declare global {
       DB_MONGO_USER: string;
       DB_MONGO_PASSWORD: string;
       DB_MONGO_PATH: string;
+      RSS_RESOURCE_URL: string;
     }
   }
 }

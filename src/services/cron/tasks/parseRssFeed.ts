@@ -1,11 +1,12 @@
 import Parser from 'rss-parser';
 import { PostModel } from '@/modules/post/post.model';
+import { logger } from '@/config/logger';
 
 const parser = new Parser();
 
 const parseRssFeed = async () => {
   try {
-    const feed = await parser.parseURL('https://lifehacker.com/rss');
+    const feed = await parser.parseURL(process.env.RSS_RESOURCE_URL);
 
     feed.items.forEach(async (post) => {
       const existedPost = await PostModel.findOne({ resourceId: post.guid });
@@ -22,8 +23,8 @@ const parseRssFeed = async () => {
 
       console.log(`New post added: ${post.title}`);
     });
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    logger.error(err);
   }
 };
 
