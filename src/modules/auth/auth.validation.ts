@@ -8,8 +8,8 @@ export const userSignInValidation: ValidationChain[] = [
 export const userSignUpValidation: ValidationChain[] = [
   body('username')
     .isString()
-    .isLength({ min: 5 })
-    .withMessage('Must be at least 5 chars long'),
+    .isLength({ min: 3 })
+    .withMessage('Must be at least 3 chars long'),
   body('email').isEmail(),
   body('password')
     .isString()
