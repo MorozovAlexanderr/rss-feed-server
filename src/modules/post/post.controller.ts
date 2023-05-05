@@ -17,16 +17,22 @@ import {
 class PostController {
   public getAll = async (
     {
-      query: { page, limit, sortField, sortDir, search },
+      query: {
+        page = 1,
+        limit = 10,
+        sortField = 'date',
+        sortDir = 'desc',
+        search,
+      },
     }: QueryRequest<PostPaginationQuery>,
     res: Response,
     next: NextFunction
   ) => {
     try {
       const paginationOptions = {
-        page: page || 1,
-        limit: limit || 10,
-        sort: { [sortField || 'date']: sortDir || 'desc' },
+        page: page,
+        limit: limit,
+        sort: { [sortField]: sortDir },
       };
 
       const searchQuery = search
@@ -73,7 +79,7 @@ class PostController {
     next: NextFunction
   ) => {
     try {
-      const newPost = PostModel.create({
+      const newPost = await PostModel.create({
         creator: user.username,
         title,
         body: content,
@@ -121,10 +127,10 @@ class PostController {
         return next(new NotFoundException());
       }
 
-      res.json(deletedPost);
+      res.json({ success: true });
     } catch (error) {
       next(error);
-    } 
+    }
   };
 }
 

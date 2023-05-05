@@ -1,4 +1,5 @@
 import express, { Application, json } from 'express';
+import cors from 'cors';
 import passport from 'passport';
 import { appRouter } from '@/router';
 import errorHandlerMiddleware from '@/middlewares/errorHandler.middleware';
@@ -31,6 +32,7 @@ class App {
 
   private initConfig() {
     this.app.use(json());
+    this.app.use(cors());
     this.app.use(passport.initialize());
   }
 

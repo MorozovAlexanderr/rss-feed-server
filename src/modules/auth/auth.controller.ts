@@ -1,4 +1,5 @@
 import { NextFunction, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import { BodyRequest } from '@/shared/types/requests.types';
 import { SignInPayload, SignUpPayload } from '@/modules/auth/auth.types';
 import { UserModel } from '@/shared/models/user.model';
@@ -47,7 +48,7 @@ class AuthController {
 
       const { accessToken } = issueJwt(newUser.id);
 
-      return res.json({ user: newUser.toJSON(), accessToken });
+      return res.status(StatusCodes.CREATED).json({ user: newUser.toJSON(), accessToken });
     } catch (error) {
       next(error);
     }
